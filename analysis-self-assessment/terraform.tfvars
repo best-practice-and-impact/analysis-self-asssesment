@@ -1,0 +1,5 @@
+project  = "analysis-self-assessment"
+image    = "eu.gcr.io/analysis-self-assessment/app:latest"
+region   = "europe-west2"
+location = "europe-west2"
+zone     = "europe-west2-a"
