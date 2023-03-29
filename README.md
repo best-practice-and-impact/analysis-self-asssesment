@@ -43,9 +43,9 @@ docker push eu.gcr.io/analysis-self-assessment/app
 ### Terraform
 
 Requires auth using gcloud. If service account keys are stored as above:
-'''
+```
 gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
-'''
+```
 
 Initialise terraform in current directory:
 ```
@@ -63,6 +63,6 @@ terraform apply
 ```
 
 Destroy infrastruction created by the Terraform configuration:
-'''
+```
 terraform destroy
-'''
+```
