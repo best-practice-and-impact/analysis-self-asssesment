@@ -30,12 +30,22 @@ Running Docker container:
 docker run -p 8080:8080 eu.gcr.io/analysis-self-assessment/app
 ```
 
-Push the built Docker to GCP Container registry (required auth using 'glcoud'):
+Pushing container to GCP container registry requires auth, which uses `GOOGLE_APPLICATION_CREDENTIALS` environment variable by default:
+```
+export GOOGLE_APPLICATION_CREDENTIALS=[path to service account credentials JSON]
+```
+
+Push the built Docker to GCP Container registry:
 ```
 docker push eu.gcr.io/analysis-self-assessment/app
 ```
 
 ### Terraform
+
+Requires auth using gcloud. If service account keys are stored as above:
+'''
+gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+'''
 
 Initialise terraform in current directory:
 ```
