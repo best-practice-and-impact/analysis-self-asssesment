@@ -62,7 +62,7 @@ Execute the actions from the execution plan:
 terraform apply
 ```
 
-Destroy infrastruction created by the Terraform configuration:
+Destroy infrastructure created by the Terraform configuration:
 ```
 terraform destroy
 ```
