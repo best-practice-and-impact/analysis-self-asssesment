@@ -1,16 +1,31 @@
-.main {
+.homeMain {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
 }
 
-.logo {
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+.home {
   position: absolute;
   top: 75px;
   left: 75px;
+}
+
+.logo {
+  position: absolute;
+  top: 75px;
+  right: 75px;
 }
 
 .code {
