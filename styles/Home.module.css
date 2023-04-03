@@ -74,6 +74,9 @@
   vertical-align: middle;
   padding: 4rem 0;
 }
+.center h1 {
+    color: #013c57;
+}
 
 .center p {
   opacity: 0.6;

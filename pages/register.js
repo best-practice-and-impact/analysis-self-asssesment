@@ -1,37 +1,42 @@
-import styles from '/styles/Home.module.css'
-import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import HomeIcon from '@mui/icons-material/Home';
-import Link from 'next/link'
-import InputLabel from '@mui/material/InputLabel';
+import { surveyJson } from 'surveys/register_survey';
+import { Serializer, FunctionFactory } from "survey-core";
+import "survey-core/defaultV2.min.css";
+import { useRouter } from 'next/navigation';
+import { Model } from "survey-core";
+import { Survey } from "survey-react-ui";
+import Head from 'next/head';
 
+Serializer.addProperty("itemvalue", "rate:number");
 
-export default function Home() {
+var getGradeRate = function(params) {
+    //this.row property available in cells of dropdown and dynamic matrices questions
+    var question = !!this.row
+        ? this.row.getQuestionByColumnName(params[0])
+        : null;
+    //if we can't find a question inside the cell (by row and column name) then return
+    if (!question) return 0;
+    //get the selected item/choice
+    var selItem = question.selectedItem;
+    //return 0 if a user did not select the item yet.
+    return !!selItem ? selItem.rate : 0;
+};
+//Register the custom function
+FunctionFactory.Instance.register("getGradeRate", getGradeRate);
+
+export default function Register() {
+    const router = useRouter();
+    const survey = new Model(surveyJson);
+    survey.onComplete.add((sender, options) => {
+    router.push("/");
+    ;
+    });
+
     return (
         <>
-            <main className={styles.main}>
-                <Link className={styles.home} href="/">
-                <Button variant="contained" endIcon={<HomeIcon />}>Home
-                    </Button>
-                    </Link>
-
-
-                <h1>Register a new analysis</h1>
-                <div className={styles.center}>
-                <FormControl variant="standard" sx={{ m: 1, width: 300 }} action="/register_submit" method="post">
-                    <InputLabel id="department-label">Department</InputLabel>
-                    <Select required disabled labelId="department-label" label="Department" id="department" name="department" defaultValue="Office for National Statistics">
-                        <MenuItem value="Office for National Statistics">Office for National Statistics</MenuItem>
-                    </Select>
-                    <TextField required label="Business area" type="text" id="area" name="area" variant="standard" />
-                    <TextField required label="Analysis name" type="text" id="analysis" name="analysis" variant="standard" />
-                    <Button type="submit">Register</Button>
-                </FormControl>
-                </div>
-            </main>
-        </>
+        <Head>
+        <title>Register an analysis</title>
+      </Head>
+      <Survey model={survey} />
+      </>
     )
 }
