@@ -11,7 +11,7 @@ export default function Document() {
       <body>
 
         <Main />
-        <Link href="/" class="sd-btn home-btn" type="button" title="Home">Home</Link>
+        <Link href="/" className="sd-btn home-btn" type="button" title="Home">Home</Link>
 
         <NextScript />
       </body>
